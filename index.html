@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curise Booking</title>
+    <title>Cruise Booking</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -29,13 +29,13 @@
     </header>
 
     <!--Booking Section-->
-    <main class="main-content container">
+    <main class="main-content container  " id='booking-section'>
 
         <div class="booking-content">
             <h1>Cruise Queen</h1>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                 industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book./p>
+                scrambled it to make a type specimen book.</p>
         </div>
 
 
@@ -52,7 +52,7 @@
             <div class="inputs  ">
                 <div class="input-group">
                     <label for="">Departure</label>
-                        <input class="inp-style" type="date" name="">
+                    <input class="inp-style" type="date" name="">
                 </div>
                 <div class="input-group">
                     <label for="">Return</label>
@@ -110,9 +110,48 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <button class="btn-style" id='bookNow'>Book Now</button>
         </div>
+
     </main>
+    <section id="payment">
+        <div class="message">
+            <h2>Congratulations!! Your booking is successful!!</h1>
+                <h3>Number of First Class ticket: <span id='show-firstClass'></span>
+            </h2>
+            <h3>Number of Economy Class ticket: <span id='show-economy'></span> </h2>
+                <h3>Total amount: $<span id="show-total"></span></h2>
+        </div>
+        <div class="payment-method">
+            <h4 class="text-center">Payment Method</h4>
+            <form>
+                <div class="mb-3">
+                    <label for="cardnmeber" class="form-label">Card Number</label>
+                    <input type="number" class="form-control" placeholder="Enter Card Number">
+
+                </div>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Card Holder Name</label>
+                    <input type="text" class="form-control" placeholder="Enter your name">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Card Holder Name</label>
+                    <input type="password" class="form-control" placeholder="Enter your Security code">
+                </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label">Expire Date</label>
+                    <input type="date" class="form-control" placeholder="Enter your expire date">
+                </div>
+                <div class="confirm-payment d-flex justify-content-center">
+                    <button type="submit" class="btn btn-success">Confirm Payment</button>
+                </div>
+
+
+
+            </form>
+        </div>
+    </section>
+
 
     <script>
         document.getElementById('firstClass-decrease').addEventListener('click', function () {
@@ -152,7 +191,6 @@
         function calculateTotalFare() {
             const firstClassCount = getInputQuantity('first-class');
             const economyCount = getInputQuantity('economy');
-
             const subtotal = firstClassCount * 150 + economyCount * 100;
             console.log(subtotal);
             document.getElementById('subtotal').innerText = subtotal;
@@ -160,12 +198,30 @@
             document.getElementById('Vat-amount').innerText = vat;
             const totalAmount = subtotal + vat;
             document.getElementById('total-amount').innerText = totalAmount;
+            document.getElementById('show-total').innerText = totalAmount;
         }
         function getInputQuantity(product) {
-            const categoryInput = document.getElementById(product+'-count');
+            const categoryInput = document.getElementById(product + '-count');
             const ticketCount = parseInt(categoryInput.value);
             return ticketCount;
         }
+        document.getElementById('bookNow').addEventListener('click', function () {
+            const bookingSection = document.getElementById('booking-section');
+            bookingSection.style.display = 'none';
+            const paymentSection = document.getElementById('payment');
+            paymentSection.style.display = 'block';
+            showCategoryNumber();
+        })
+        function showCategoryNumber() {
+            const firstClassNumber = getInputQuantity('first-class');
+            const economyClassNumber = getInputQuantity('economy');
+            document.getElementById('show-firstClass').innerText = firstClassNumber;
+            document.getElementById('show-economy').innerText = economyClassNumber;
+
+        }
+
+
+
     </script>
 
     <!--Thank You-->
